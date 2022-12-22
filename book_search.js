@@ -19,20 +19,23 @@
  * @returns {JSON} - Search results.
  * */ 
  function findSearchTermInBooks(searchTerm, scannedTextObj) {
-    /** You will need to implement your search and 
-     * return the appropriate object here. */
 
+    // result object that will be outputted from this function
     var result = {
         "SearchTerm": searchTerm,
         "Results": []
     };
 
+    // looping through each book in input object
     scannedTextObj.forEach(book => {
+        // storing relevant info
         const bookISBN = book.ISBN 
-        const bookContent = book.Content
         
-        bookContent.forEach(entry => {
+        // looping through each content text in the specific boook
+        book.Content.forEach(entry => {
+            // checking if the search term is found in text
             if (entry.Text.includes(searchTerm)) {
+                // adding the specific text details to the results object
                 result.Results.push({
                     "ISBN": bookISBN,
                     "Page": entry.Page,
@@ -42,6 +45,7 @@
         })
     })
     
+    // once all books and text entries are scanned, return result object
     return result; 
 }
 
